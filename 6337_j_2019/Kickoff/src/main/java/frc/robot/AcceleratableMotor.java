@@ -1,49 +1,9 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.PWMSpeedController;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Timer;
-
 //TODO: Once decided, change PWMSpeedController to specific component like Spark
-public class AcceleratableMotor extends Spark
+public final class AcceleratableMotor
 {
-    private double inc;
-    private static final double DEFAULT_INCREMENT = 0.05;
-    public AcceleratableMotor(final int channel)
-    {
-        super(channel);
-        inc = DEFAULT_INCREMENT;
-    }
-    public AcceleratableMotor(final int channel, double increment)
-    {
-        super(channel);
-        inc = Math.abs(increment);
-    }
-    public void set(double desiredSpeed)
-    {
-        /*
-        POLISH THIS
-        double nextSpeed = Math.Abs(currentSpeed) + inc;
-        nextSpeed *= Math.Signum(currentSpeed);
-        if(desiredSpeed - nextSpeed > 0)
-        {
-            //if the next speed does not go over desiredSpeed
-            this.setSpeed(nextSpeed);
-            currentSpeed = nextSpeed;
-        }
-        else
-        {
-            this.setSpeed(desiredSpeed);
-            currentSpeed = desiredSpeed;
-        }
-        */
-        // Interpolate the current speed to the desired speed
-        setSpeed(accelerateNoTime(get(),desiredSpeed));
-    }
-    private double accelerateNoTime(double currentVal, double desiredVal)
-    {
-        return accelerateNoTime(currentVal, desiredVal, 1.0, inc);
-    }
+    public static final double DEFAULT_INCREMENT = 0.05;
     public static double accelerateNoTime(double currentValue, double desiredValue, double maxAbsValue, double increment)
     {
         double result = currentValue + Math.signum(desiredValue - currentValue)*increment;

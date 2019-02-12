@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.Robot;
 public class OI {
   //// CREATING BUTTONS
@@ -51,17 +52,26 @@ public class OI {
   public static final int PANEL_PUSH_BUTTON_NUM = 2; //B button
   public static final int CLIMBER_FRONT_BUTTON_NUM = 4; //Y button
   public static final int CLIMBER_BACK_BUTTON_NUM = 1; //A button
+  public static final int CARGO_HANDLER_BUTTON_NUM = 3; //X button
+  public static final int LIFT_UP_BUTTON_NUM = 6; //Right side button
+  public static final int LIFT_DOWN_BUTTON_AXES = 3; //Right side trigger
 
   public static final XboxController XBOX_CONTROLLER;
   public static final Button PANEL_PUSH_BUTTON;
   public static final Button CLIMBER_FRONT_BUTTON;
   public static final Button CLIMBER_BACK_BUTTON;
+  public static final Button CARGO_HANDLER_BUTTON;
+  public static final Button LIFT_UP_BUTTON;
+  public static final TriggerAsButton LIFT_DOWN_BUTTON; //Technically treated like a button
   static
-  {    
+  {
     XBOX_CONTROLLER = new XboxController(OI.PORT_XBOX_CONTROLLER);
     PANEL_PUSH_BUTTON = new JoystickButton(XBOX_CONTROLLER, PANEL_PUSH_BUTTON_NUM);
     CLIMBER_FRONT_BUTTON = new JoystickButton(XBOX_CONTROLLER, CLIMBER_FRONT_BUTTON_NUM);
     CLIMBER_BACK_BUTTON = new JoystickButton(XBOX_CONTROLLER, CLIMBER_BACK_BUTTON_NUM);
+    CARGO_HANDLER_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_BUTTON_NUM);
+    LIFT_UP_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_UP_BUTTON_NUM);
+    LIFT_DOWN_BUTTON = new TriggerAsButton(XBOX_CONTROLLER, LIFT_HAND);
   }
 
 }

@@ -28,6 +28,4 @@ public class CargoLift extends Command {
         Robot.cHandler.cargoRight().set(0);
         stopCalled = true;
     }
-
-
 }

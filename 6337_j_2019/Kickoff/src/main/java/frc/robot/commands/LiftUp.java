@@ -6,7 +6,6 @@ import frc.robot.Robot;
 public class LiftUp extends Command {
     private double speed;
     public LiftUp(double speed) {
-        super();
         this.speed = speed;
     }  
     @Override
@@ -14,11 +13,11 @@ public class LiftUp extends Command {
         return stopFinish;
     }
     protected void execute() {
-        Robot.m_LiftingSubsystem.liftGetter().set(speed);
+        Robot.m_LiftingSubsystem.setSpeed(speed);
     }
     private boolean stopFinish = false;
     public void stopExecute() {
-        Robot.m_LiftingSubsystem.liftGetter().set(0);
+        Robot.m_LiftingSubsystem.setSpeed(0);
         stopFinish = true;
     }
 }

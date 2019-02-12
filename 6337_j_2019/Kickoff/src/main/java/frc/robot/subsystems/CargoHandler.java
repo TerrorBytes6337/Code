@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class CLift extends Subsystem{
+public class CargoHandler extends Subsystem{
     private PWMSpeedController cargoLiftController = new Spark(RobotMap.LEFT_CARGO_HANDLER);
     public PWMSpeedController cargoLeft(){
         return cargoLiftController;
