@@ -49,29 +49,46 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
   public static final int PORT_XBOX_CONTROLLER = 0;
   public static final Hand LIFT_HAND = Hand.kRight;
-  public static final int PANEL_PUSH_BUTTON_NUM = 2; //B button
-  public static final int CLIMBER_FRONT_BUTTON_NUM = 4; //Y button
-  public static final int CLIMBER_BACK_BUTTON_NUM = 1; //A button
-  public static final int CARGO_HANDLER_BUTTON_NUM = 3; //X button
-  public static final int LIFT_UP_BUTTON_NUM = 6; //Right side button
-  public static final int LIFT_DOWN_BUTTON_AXES = 3; //Right side trigger
+  public static final int PANEL_PUSH_BUTTON_CLOSE = 10; //right joystick
+  public static final int PANEL_PUSH_BUTTON_OPEN = 9; //left joystick
+  public static final int CLIMBER_FRONT_BUTTON_NUM = 8; //Y button
+  public static final int CLIMBER_BACK_BUTTON_NUM = 7; //A button
+  public static final int LIFT_UP_BUTTON_NUM = 6; //Right side button bumper
+  public static final int LIFT_DOWN_BUTTON_NUM = 5; //left side button bumper
+  public static final int CARGO_HANDLER_IN = 3; //X button pull the ball in
+  public static final int CARGO_HANDLER_OUT = 2; //B button shoot the ball out
+  public static final int CARGO_HANDLER_UP = 1; //Y button, put the handler up
+  public static final int CARGO_HANDLER_DOWN = 4; //A button, put the handler down
+
+  //public static final int LIFT_DOWN_BUTTON_AXES = 3; //Right side trigger
 
   public static final XboxController XBOX_CONTROLLER;
-  public static final Button PANEL_PUSH_BUTTON;
+  public static final Button PANEL_BUTTON_CLOSE;
+  public static final Button PANEL_BUTTON_OPEN;
   public static final Button CLIMBER_FRONT_BUTTON;
   public static final Button CLIMBER_BACK_BUTTON;
-  public static final Button CARGO_HANDLER_BUTTON;
   public static final Button LIFT_UP_BUTTON;
-  public static final TriggerAsButton LIFT_DOWN_BUTTON; //Technically treated like a button
+  public static final Button LIFT_DOWN_BUTTON;
+  public static final Button CARGO_HANDLER_IN_BUTTON;
+  public static final Button CARGO_HANDLER_OUT_BUTTON;
+  public static final Button CARGO_HANDLER_UP_BUTTON;
+  public static final Button CARGO_HANDLER_DOWN_BUTTON;
+  //public static final TriggerAsButton LIFT_DOWN_BUTTON; //Technically treated like a button
+  public static final TriggerAsButton SWITCH_CAMERA_BUTTON;
   static
   {
     XBOX_CONTROLLER = new XboxController(OI.PORT_XBOX_CONTROLLER);
-    PANEL_PUSH_BUTTON = new JoystickButton(XBOX_CONTROLLER, PANEL_PUSH_BUTTON_NUM);
+    PANEL_BUTTON_CLOSE = new JoystickButton(XBOX_CONTROLLER, PANEL_PUSH_BUTTON_CLOSE);
+    PANEL_BUTTON_OPEN = new JoystickButton(XBOX_CONTROLLER, PANEL_PUSH_BUTTON_OPEN);
     CLIMBER_FRONT_BUTTON = new JoystickButton(XBOX_CONTROLLER, CLIMBER_FRONT_BUTTON_NUM);
     CLIMBER_BACK_BUTTON = new JoystickButton(XBOX_CONTROLLER, CLIMBER_BACK_BUTTON_NUM);
-    CARGO_HANDLER_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_BUTTON_NUM);
+    CARGO_HANDLER_IN_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_IN);
+    CARGO_HANDLER_OUT_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_OUT);
+    CARGO_HANDLER_UP_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_UP);
+    CARGO_HANDLER_DOWN_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_DOWN);
     LIFT_UP_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_UP_BUTTON_NUM);
-    LIFT_DOWN_BUTTON = new TriggerAsButton(XBOX_CONTROLLER, LIFT_HAND);
+    LIFT_DOWN_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_DOWN_BUTTON_NUM);
+    SWITCH_CAMERA_BUTTON = new TriggerAsButton(XBOX_CONTROLLER, Hand.kRight); //Right trigger
   }
 
 }

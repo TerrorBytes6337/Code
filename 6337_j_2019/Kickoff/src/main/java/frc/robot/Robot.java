@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   public static Driving m_DrivingSubsystem;
   public static Sublift m_LiftingSubsystem;
   public static CargoHandler cHandler;
-  public static CameraSubsystem m_CameraSubsystem;
+  //public static CameraSubsystem m_CameraSubsystem;
   public static PanelPusher m_PanelSubsystem;
   public static Climber m_ClimbingSubsystem;
   //private static final Timer ROBOT_TIMER = new Timer();
@@ -51,42 +51,68 @@ public class Robot extends TimedRobot {
     smartDashboardInit();
     SubsystemInit();
     System.out.println("End of robot Init");
+
   }
   //Assign commands to button events (only in teleop)
   private static void MapButtons()
   {    
+    ClimbBack oClimbBack = new ClimbBack();
+    ClimbFront oClimbFront = new ClimbFront();
+
     System.out.println("Mapping panel push button");
-    OI.PANEL_PUSH_BUTTON.whenPressed(new PushPanel(true));
-    OI.PANEL_PUSH_BUTTON.whenReleased(new PushPanel(false));
+    OI.PANEL_BUTTON_CLOSE.whenPressed(new PushPanel(true));
+    OI.PANEL_BUTTON_OPEN.whenReleased(new PushPanel(false));
+
     System.out.println("Mapping Climbing buttons");
-    OI.CLIMBER_BACK_BUTTON.whenPressed(new ClimbBack(true));
-    OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
-    OI.CLIMBER_FRONT_BUTTON.whenPressed(new ClimbFront(true));
-    OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
+    OI.CLIMBER_BACK_BUTTON.whenPressed(oClimbBack);
+    //OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
+    OI.CLIMBER_FRONT_BUTTON.whenPressed(oClimbFront);
+    //OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
     // TODO: Uncomment when port to 6337
+
     System.out.println("Mapping Lifting buttons");
-    OI.LIFT_UP_BUTTON.whenPressed(new LiftUp(1));
-    OI.LIFT_UP_BUTTON.whenReleased(new LiftUp(0));
-    OI.LIFT_DOWN_BUTTON.whenActive(new LiftUp(-1));
-    OI.LIFT_DOWN_BUTTON.whenInactive(new LiftUp(0));
+    OI.LIFT_UP_BUTTON.whileHeld(new LiftUp(1));
+    OI.LIFT_UP_BUTTON.whenReleased(new LiftUp(0.15));
+    OI.LIFT_DOWN_BUTTON.whileHeld(new LiftUp(-0.5));
+    OI.LIFT_DOWN_BUTTON.whenReleased(new LiftUp(0.15));
+
     System.out.println("Mapping Cargo Handler buttons");
-    OI.CARGO_HANDLER_BUTTON.whenPressed(new CargoLift(1));
-    OI.CARGO_HANDLER_BUTTON.whenReleased(new CargoLift(0));
+    OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(0.5));
+    OI.CARGO_HANDLER_DOWN_BUTTON.whenReleased(new CargoLift(0.1));
+    OI.CARGO_HANDLER_UP_BUTTON.whileActive(new CargoLift(-0.5));
+    OI.CARGO_HANDLER_UP_BUTTON.whenReleased(new CargoLift(0.1));
+
+    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(1));
+    OI.CARGO_HANDLER_IN_BUTTON.whenReleased(new CargoGetBall(0));
+    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.5));
+    OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
+
+    System.out.println("Mapping Camera Managing buttons");
+    OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
+
     System.out.println("Adding arcade drive command to scheduler");
-    Scheduler.getInstance().add(new ArcadeDrive(true));
+    Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
   }
   private static void SubsystemInit()
   {
     //TODO: uncomment these for 6337
+    System.out.println("LiftingSubsystem init");
     m_LiftingSubsystem = new Sublift();
+
+    System.out.println("CargoHandler init");
     cHandler = new CargoHandler();
-    m_DrivingSubsystem = new Driving(true); // TODO: remove true when porting to 6337
-    m_CameraSubsystem = new CameraSubsystem(RobotMap.PIXY_CAMERA_PORT, RobotMap.MS_CAMERA_PORT);
+    System.out.println("Driving system init");
+    m_DrivingSubsystem = new Driving(); // TODO: remove true when porting to 6337
+    // System.out.println("Camera subsystem init");
+    // m_CameraSubsystem = new CameraSubsystem(RobotMap.PIXY_CAMERA_PORT, RobotMap.MS_CAMERA_PORT);
     // These stays
     System.out.println("PanelPusher init");
     m_PanelSubsystem = new PanelPusher();
     System.out.println("Climber init");
     m_ClimbingSubsystem = new Climber();
+
+    System.out.println("Camera init");
+    CameraServer.getInstance().startAutomaticCapture(Camera.getInstance());
   }
   private void smartDashboardInit() {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

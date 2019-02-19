@@ -32,21 +32,22 @@ public class RobotMap {
   public static final int PORT_RIGHT_WHEEL_MOTOR = 1;
 
   //Lifting Subsystem
-  public static final int LIFT_MOTOR = 2;
-
-  //Cargo Handler Subsystem
-  public static final int LEFT_CARGO_HANDLER = 3;
-  public static final int RIGHT_CARGO_HANDLER = 4;
+  public static final int LIFT_MOTOR = 9;
+  
+  // Cargo Handler Subsystem
+  public static final int CARGO_HANDLER_UP_DOWN = 3;
+  public static final int CARGO_HANDLER_IN_OUT = 4;
   
   //Solenoid
 
   //Panel Pushing Subsystem
   public static final int PANEL_PUSH = 0;
   public static final int PANEL_PULL = 1;
-  public static final int CLIMBER_FRONT_PUSH = 2;
-  public static final int CLIMBER_FRONT_PULL = 3;
-  public static final int CLIMBER_BACK_PUSH = 4;
-  public static final int CLIMBER_BACK_PULL = 5;
+  public static final int CLIMBER_FRONT_PUSH = 2; //red tape
+  public static final int CLIMBER_FRONT_PULL = 3; //black tape
+  public static final int CLIMBER_BACK_PUSH = 4; //black tape
+  public static final int CLIMBER_BACK_PULL = 5; //red tape
+  //someone was here
 
   //USB Ports
 

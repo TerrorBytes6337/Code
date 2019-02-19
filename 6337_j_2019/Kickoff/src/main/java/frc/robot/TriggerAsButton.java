@@ -17,7 +17,7 @@ public class TriggerAsButton extends Trigger
     @Override
     public boolean get() {
         //TODO: remove this when finished debugging
-        System.out.println("Trigger of hand "+ hand.toString()+" has value:" +controller.getTriggerAxis(hand));
+        //System.out.println("Trigger of hand "+ hand.toString()+" has value:" +controller.getTriggerAxis(hand));
         return controller.getTriggerAxis(hand) > DEFAULT_TRIGGER_VALUE;
     }
 

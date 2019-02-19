@@ -1,4 +1,4 @@
 Map buttons to cargo handler (Ask if they need two or one button, currently one)
-Optimize the code / Throttle lift motor / Make lift motor accelerate / Make cargo handler accelerate
+Optimize the code / Throttle lift motor / Make lift motor accelerate / Accelerate motors for safety control
 Automate lift system (Need actual testing)
 Test commands feature

@@ -1,6 +1,5 @@
 package frc.robot;
 
-//TODO: Once decided, change PWMSpeedController to specific component like Spark
 public final class AcceleratableMotor
 {
     public static final double DEFAULT_INCREMENT = 0.05;
@@ -42,5 +41,14 @@ public final class AcceleratableMotor
         {
             return result;
         }
+    }
+    public static double speedLerp(double current, double desired, double t, double acceptanceDelta)
+    {
+        double result = (desired - current) * t;
+        if(Math.abs(desired-result) <= acceptanceDelta)
+        {
+            return desired;
+        }
+        return result;
     }
 }

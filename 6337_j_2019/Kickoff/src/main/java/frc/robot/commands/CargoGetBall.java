@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CargoLift extends Command {
+public class CargoGetBall extends Command {
     private double speed;
 
-    public CargoLift(double speed){
+    public CargoGetBall(double speed){
         super();
         this.speed = speed;
     }
@@ -17,7 +17,7 @@ public class CargoLift extends Command {
     }
 
     public void execute(){
-        Robot.cHandler.cargoLift().set(speed);
+        Robot.cHandler.cargoGetBall().set(speed);
         //Robot.cHandler.cargoRight().set(-1 * speed);
     }
     
@@ -25,9 +25,7 @@ public class CargoLift extends Command {
     public void stopExecuting()
     {
         //Robot.cHandler.cargoLeft().set(0);
-        System.out.println("stop the lift");
-        Robot.cHandler.cargoLift().set(0);
-        Robot.cHandler.cargoLift().stopMotor();
+        Robot.cHandler.cargoGetBall().set(0);
         stopCalled = true;
     }
 }

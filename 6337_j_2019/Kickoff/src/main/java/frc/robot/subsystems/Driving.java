@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.OI;
@@ -41,9 +40,11 @@ public class Driving extends Subsystem
     public double getForwardXbox()
     {
         return OI.XBOX_CONTROLLER.getY(VERTICAL_HAND);
+        //return -OI.XBOX_CONTROLLER.getRawAxis(1);
     }
     public double getRightXbox()
     {
         return OI.XBOX_CONTROLLER.getX(HORIZONTAL_HAND);
+        //return OI.XBOX_CONTROLLER.getRawAxis(4);
     }
 }
