@@ -75,6 +75,15 @@ public class OI {
   public static final Button CARGO_HANDLER_DOWN_BUTTON;
   //public static final TriggerAsButton LIFT_DOWN_BUTTON; //Technically treated like a button
   public static final TriggerAsButton SWITCH_CAMERA_BUTTON;
+
+  public static final POVAsButton EXTERN_0;
+  public static final POVAsButton EXTERN_1;
+  public static final POVAsButton EXTERN_2;
+  public static final POVAsButton EXTERN_3;
+  public static final POVAsButton EXTERN_4;
+  public static final POVAsButton EXTERN_5;
+  public static final POVAsButton EXTERN_6;
+  public static final POVAsButton EXTERN_7;
   static
   {
     XBOX_CONTROLLER = new XboxController(OI.PORT_XBOX_CONTROLLER);
@@ -89,6 +98,14 @@ public class OI {
     LIFT_UP_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_UP_BUTTON_NUM);
     LIFT_DOWN_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_DOWN_BUTTON_NUM);
     SWITCH_CAMERA_BUTTON = new TriggerAsButton(XBOX_CONTROLLER, Hand.kRight); //Right trigger
+    EXTERN_0 = new POVAsButton(0);
+    EXTERN_1 = new POVAsButton(1);
+    EXTERN_2 = new POVAsButton(2);
+    EXTERN_3 = new POVAsButton(3);
+    EXTERN_4 = new POVAsButton(4);
+    EXTERN_5 = new POVAsButton(5);
+    EXTERN_6 = new POVAsButton(6);
+    EXTERN_7 = new POVAsButton(7);
   }
 
 }

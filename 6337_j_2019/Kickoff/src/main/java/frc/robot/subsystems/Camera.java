@@ -12,14 +12,16 @@ public class Camera extends Subsystem
     // = CameraServer.getInstance().startAutomaticCapture("HandlerCam", 0);
     private final UsbCamera camDrive;
     // = CameraServer.getInstance().startAutomaticCapture("DriveCam", 1);
-    private final VideoSink sink = CameraServer.getInstance().getServer();
+    private final VideoSink sink;
     private boolean currentlyShowingDrive;
     public boolean isCurrentlyShowingDrive(){return currentlyShowingDrive;}
     private static Camera instance;
 
     private Camera(){
-        camHandler = new UsbCamera("HandlerCam", 0);
-        camDrive = new UsbCamera("DriveCam", 1);
+        camHandler = CameraServer.getInstance().startAutomaticCapture(1);
+        camDrive = CameraServer.getInstance().startAutomaticCapture(0);
+        sink = CameraServer.getInstance().getServer(); //USB Camera 0 as source
+        System.out.println("sink: "+sink.getName()+"; source: "+ sink.getSource().getName());
         init();
     }
 
@@ -57,11 +59,13 @@ public class Camera extends Subsystem
     public void switchCamera()
     {
         if(currentlyShowingDrive)
+        {
             showCameraHandler();
+        }
         else
+        {
             showCameraDrive();
-        currentlyShowingDrive = !currentlyShowingDrive;
-
+        }
     }
     private void showCameraHandler(){
         sink.setSource(camHandler);

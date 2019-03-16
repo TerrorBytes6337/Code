@@ -9,6 +9,8 @@ public class TriggerAsButton extends Trigger
     private static final double DEFAULT_TRIGGER_VALUE = 0.60;
     private final XboxController controller;
     private final Hand hand;
+    //TODO: remove after debug
+    private boolean lastGet = false;
     public TriggerAsButton(final XboxController x, final Hand h)
     {
         controller = x;
@@ -16,9 +18,21 @@ public class TriggerAsButton extends Trigger
     }
     @Override
     public boolean get() {
-        //TODO: remove this when finished debugging
-        //System.out.println("Trigger of hand "+ hand.toString()+" has value:" +controller.getTriggerAxis(hand));
-        return controller.getTriggerAxis(hand) > DEFAULT_TRIGGER_VALUE;
+        boolean returnVal = controller.getTriggerAxis(hand) > DEFAULT_TRIGGER_VALUE;
+        // if(returnVal && lastGet == false)
+        // {   
+        //     //TODO: remove this when finished debugging
+        //     System.out.println(hand == Hand.kLeft? "!Left trigger!": "!Right trigger!");
+        // }
+        //TODO: remove after debug
+        if(lastGet != returnVal)
+        {
+            String status = returnVal? "!":"_";
+            String name = hand == Hand.kLeft? "Left trigger": "Right trigger";
+            System.out.println(status + name + status);
+        }
+        lastGet = returnVal;
+        return returnVal;
     }
 
 }

@@ -50,11 +50,19 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     smartDashboardInit();
     SubsystemInit();
+
+    MapUtilityButtons();
     System.out.println("End of robot Init");
 
   }
+  private static void MapUtilityButtons()
+  {
+    System.out.println("Mapping Camera Managing buttons");
+    OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
+    //Other debug buttons here
+  }
   //Assign commands to button events (only in teleop)
-  private static void MapButtons()
+  private static void MapActionButtons()
   {    
     ClimbBack oClimbBack = new ClimbBack();
     ClimbFront oClimbFront = new ClimbFront();
@@ -64,10 +72,10 @@ public class Robot extends TimedRobot {
     OI.PANEL_BUTTON_OPEN.whenReleased(new PushPanel(false));
 
     System.out.println("Mapping Climbing buttons");
-    OI.CLIMBER_BACK_BUTTON.whenPressed(oClimbBack);
-    //OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
-    OI.CLIMBER_FRONT_BUTTON.whenPressed(oClimbFront);
-    //OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
+    OI.CLIMBER_BACK_BUTTON.whileActive(oClimbBack);
+    // OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
+    OI.CLIMBER_FRONT_BUTTON.whileActive(oClimbFront);
+    // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
     // TODO: Uncomment when port to 6337
 
     System.out.println("Mapping Lifting buttons");
@@ -87,12 +95,10 @@ public class Robot extends TimedRobot {
     OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.5));
     OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
 
-    System.out.println("Mapping Camera Managing buttons");
-    OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
-
     System.out.println("Adding arcade drive command to scheduler");
     Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
   }
+  
   private static void SubsystemInit()
   {
     //TODO: uncomment these for 6337
@@ -112,12 +118,16 @@ public class Robot extends TimedRobot {
     m_ClimbingSubsystem = new Climber();
 
     System.out.println("Camera init");
-    CameraServer.getInstance().startAutomaticCapture(Camera.getInstance());
+    // CameraServer.getInstance().startAutomaticCapture();
+    Camera.getInstance();
+    
   }
   private void smartDashboardInit() {
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    // // chooser.addOption("My Auto", new MyAutoCommand());
+    // SmartDashboard.putData("Auto mode", m_chooser);
+
+
   }
 
   /**
@@ -170,10 +180,10 @@ public class Robot extends TimedRobot {
      * autonomousCommand = new ExampleCommand(); break; }
      */
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    // // schedule the autonomous command (example)
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.start();
+    // }
     teleopInit();
   }
 
@@ -187,14 +197,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-    MapButtons();
+    // // This makes sure that the autonomous stops running when
+    // // teleop starts running. If you want the autonomous to
+    // // continue until interrupted by another command, remove
+    // // this line or comment it out.
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
+    MapActionButtons();
   }
 
   /**
