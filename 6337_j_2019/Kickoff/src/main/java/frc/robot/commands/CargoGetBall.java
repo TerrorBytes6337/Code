@@ -13,19 +13,11 @@ public class CargoGetBall extends Command {
 
     @Override
     protected boolean isFinished() {
-        return stopCalled;
+        return true;
     }
 
     public void execute(){
         Robot.cHandler.cargoGetBall().set(speed);
         //Robot.cHandler.cargoRight().set(-1 * speed);
-    }
-    
-    private boolean stopCalled = false;
-    public void stopExecuting()
-    {
-        //Robot.cHandler.cargoLeft().set(0);
-        Robot.cHandler.cargoGetBall().set(0);
-        stopCalled = true;
     }
 }

@@ -52,14 +52,21 @@ public class Robot extends TimedRobot {
     SubsystemInit();
 
     MapUtilityButtons();
+    AddUtilityCommands();
     System.out.println("End of robot Init");
 
   }
+  
+  private void AddUtilityCommands() {
+    // Scheduler.getInstance().add(new Extern_UpdateCamSpecs(true));
+  }
+
   private static void MapUtilityButtons()
   {
-    System.out.println("Mapping Camera Managing buttons");
-    OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
+    // System.out.println("Mapping Camera Managing buttons");
+    // OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
     //Other debug buttons here
+    // OI.EXTERN_0.whenActive(new Extern_UpdateCamSpecs());
   }
   //Assign commands to button events (only in teleop)
   private static void MapActionButtons()
@@ -72,11 +79,11 @@ public class Robot extends TimedRobot {
     OI.PANEL_BUTTON_OPEN.whenReleased(new PushPanel(false));
 
     System.out.println("Mapping Climbing buttons");
-    OI.CLIMBER_BACK_BUTTON.whileActive(oClimbBack);
+    //TODO: while or when active?
+    OI.CLIMBER_BACK_BUTTON.whenActive(oClimbBack);
     // OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
-    OI.CLIMBER_FRONT_BUTTON.whileActive(oClimbFront);
+    OI.CLIMBER_FRONT_BUTTON.whenActive(oClimbFront);
     // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
-    // TODO: Uncomment when port to 6337
 
     System.out.println("Mapping Lifting buttons");
     OI.LIFT_UP_BUTTON.whileHeld(new LiftUp(1));
@@ -101,14 +108,13 @@ public class Robot extends TimedRobot {
   
   private static void SubsystemInit()
   {
-    //TODO: uncomment these for 6337
     System.out.println("LiftingSubsystem init");
     m_LiftingSubsystem = new Sublift();
 
     System.out.println("CargoHandler init");
     cHandler = new CargoHandler();
     System.out.println("Driving system init");
-    m_DrivingSubsystem = new Driving(); // TODO: remove true when porting to 6337
+    m_DrivingSubsystem = new Driving();
     // System.out.println("Camera subsystem init");
     // m_CameraSubsystem = new CameraSubsystem(RobotMap.PIXY_CAMERA_PORT, RobotMap.MS_CAMERA_PORT);
     // These stays
@@ -118,8 +124,9 @@ public class Robot extends TimedRobot {
     m_ClimbingSubsystem = new Climber();
 
     System.out.println("Camera init");
-    // CameraServer.getInstance().startAutomaticCapture();
-    Camera.getInstance();
+    ReworkedCamera.getInstance();
+    //CameraServer.getInstance().startAutomaticCapture();
+    // Camera.getInstance();
     
   }
   private void smartDashboardInit() {
@@ -141,7 +148,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   /**
@@ -205,6 +211,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     MapActionButtons();
+    MapUtilityButtons();
   }
 
   /**

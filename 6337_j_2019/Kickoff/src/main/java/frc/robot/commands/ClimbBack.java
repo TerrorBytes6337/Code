@@ -2,9 +2,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ClimbBack extends Command
+public class ClimbBack extends InstantCommand
 {
     private boolean on;
     public ClimbBack()
@@ -27,9 +28,5 @@ public class ClimbBack extends Command
         Robot.m_ClimbingSubsystem.setBackLeg(val);
     }
 
-    @Override
-    protected boolean isFinished() {
-        return true;
-    }
 
 }

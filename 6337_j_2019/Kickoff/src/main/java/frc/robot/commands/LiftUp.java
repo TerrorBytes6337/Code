@@ -23,7 +23,12 @@ public class LiftUp extends Command {
             Robot.m_LiftingSubsystem.setPositive(speed);
         }else if (speed < 0){
             Robot.m_LiftingSubsystem.setNegative(speed);
-        }    
+        }
+        //TODO: missing:
+        // else
+        // {
+        //     Robot.m_LiftingSubsystem.setSpeed(0);
+        // }
     }
     
 
