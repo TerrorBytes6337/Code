@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
   
   public static Driving m_DrivingSubsystem;
   public static Sublift m_LiftingSubsystem;
-  public static CLift cHandler;
-  public static CameraSubsystem m_CameraSubsystem;
+  public static CargoHandler cHandler;
+  //public static CameraSubsystem m_CameraSubsystem;
   public static PanelPusher m_PanelSubsystem;
   public static Climber m_ClimbingSubsystem;
   //private static final Timer ROBOT_TIMER = new Timer();
@@ -50,39 +50,91 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     smartDashboardInit();
     SubsystemInit();
+
+    MapUtilityButtons();
+    AddUtilityCommands();
     System.out.println("End of robot Init");
+
+  }
+  
+  private void AddUtilityCommands() {
+    // Scheduler.getInstance().add(new Extern_UpdateCamSpecs(true));
+  }
+
+  private static void MapUtilityButtons()
+  {
+    // System.out.println("Mapping Camera Managing buttons");
+    // OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
+    //Other debug buttons here
+    // OI.EXTERN_0.whenActive(new Extern_UpdateCamSpecs());
   }
   //Assign commands to button events (only in teleop)
-  private static void MapButtons()
+  private static void MapActionButtons()
   {    
+    ClimbBack oClimbBack = new ClimbBack();
+    ClimbFront oClimbFront = new ClimbFront();
+
     System.out.println("Mapping panel push button");
-    OI.PANEL_PUSH_BUTTON.whenPressed(new PushPanel(true));
-    OI.PANEL_PUSH_BUTTON.whenReleased(new PushPanel(false));
+    OI.PANEL_BUTTON_CLOSE.whenPressed(new PushPanel(true));
+    OI.PANEL_BUTTON_OPEN.whenReleased(new PushPanel(false));
+
     System.out.println("Mapping Climbing buttons");
-    OI.CLIMBER_BACK_BUTTON.whenPressed(new ClimbBack(true));
-    OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
-    OI.CLIMBER_FRONT_BUTTON.whenPressed(new ClimbFront(true));
-    OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
-    // TODO: Uncomment when port to 6337
-    // System.out.println("Adding arcade drive command to scheduler");
-    // Scheduler.getInstance().add(new ArcadeDrive(true));
+    //TODO: while or when active?
+    OI.CLIMBER_BACK_BUTTON.whenActive(oClimbBack);
+    // OI.CLIMBER_BACK_BUTTON.whenReleased(new ClimbBack(false));
+    OI.CLIMBER_FRONT_BUTTON.whenActive(oClimbFront);
+    // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
+
+    System.out.println("Mapping Lifting buttons");
+    OI.LIFT_UP_BUTTON.whileHeld(new LiftUp(1));
+    OI.LIFT_UP_BUTTON.whenReleased(new LiftUp(0.15));
+    OI.LIFT_DOWN_BUTTON.whileHeld(new LiftUp(-0.5));
+    OI.LIFT_DOWN_BUTTON.whenReleased(new LiftUp(0.15));
+
+    System.out.println("Mapping Cargo Handler buttons");
+    OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(0.5));
+    OI.CARGO_HANDLER_DOWN_BUTTON.whenReleased(new CargoLift(0.1));
+    OI.CARGO_HANDLER_UP_BUTTON.whileActive(new CargoLift(-0.5));
+    OI.CARGO_HANDLER_UP_BUTTON.whenReleased(new CargoLift(0.1));
+
+    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(1));
+    OI.CARGO_HANDLER_IN_BUTTON.whenReleased(new CargoGetBall(0));
+    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.5));
+    OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
+
+    System.out.println("Adding arcade drive command to scheduler");
+    Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
   }
+  
   private static void SubsystemInit()
   {
-    //TODO: uncomment these for 6337
-    // m_LiftingSubsystem = new Sublift();
-    // cHandler = new CLift();
-    m_DrivingSubsystem = new Driving(true); // remove true when porting to 6337
-    //m_CameraSubsystem = new CameraSubsystem(RobotMap.PIXY_CAMERA_PORT, RobotMap.MS_CAMERA_PORT);
+    System.out.println("LiftingSubsystem init");
+    m_LiftingSubsystem = new Sublift();
+
+    System.out.println("CargoHandler init");
+    cHandler = new CargoHandler();
+    System.out.println("Driving system init");
+    m_DrivingSubsystem = new Driving();
+    // System.out.println("Camera subsystem init");
+    // m_CameraSubsystem = new CameraSubsystem(RobotMap.PIXY_CAMERA_PORT, RobotMap.MS_CAMERA_PORT);
+    // These stays
     System.out.println("PanelPusher init");
     m_PanelSubsystem = new PanelPusher();
     System.out.println("Climber init");
     m_ClimbingSubsystem = new Climber();
+
+    System.out.println("Camera init");
+    ReworkedCamera.getInstance();
+    //CameraServer.getInstance().startAutomaticCapture();
+    // Camera.getInstance();
+    
   }
   private void smartDashboardInit() {
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    // // chooser.addOption("My Auto", new MyAutoCommand());
+    // SmartDashboard.putData("Auto mode", m_chooser);
+
+
   }
 
   /**
@@ -96,7 +148,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   /**
@@ -135,10 +186,11 @@ public class Robot extends TimedRobot {
      * autonomousCommand = new ExampleCommand(); break; }
      */
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    // // schedule the autonomous command (example)
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.start();
+    // }
+    teleopInit();
   }
 
   /**
@@ -151,14 +203,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-    MapButtons();
+    // // This makes sure that the autonomous stops running when
+    // // teleop starts running. If you want the autonomous to
+    // // continue until interrupted by another command, remove
+    // // this line or comment it out.
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
+    MapActionButtons();
+    MapUtilityButtons();
   }
 
   /**
