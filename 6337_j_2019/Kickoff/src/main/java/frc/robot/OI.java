@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.Robot;
+//TODO: if xbox is not used, handle errors.
 public class OI {
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
