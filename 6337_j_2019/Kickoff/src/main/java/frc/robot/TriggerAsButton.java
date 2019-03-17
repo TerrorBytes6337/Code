@@ -9,8 +9,8 @@ public class TriggerAsButton extends Trigger
     private static final double DEFAULT_TRIGGER_VALUE = 0.60;
     private final XboxController controller;
     private final Hand hand;
-    //TODO: remove after debug
-    private boolean lastGet = false;
+    // //TODO: remove after debug
+    // private boolean lastGet = false;
     public TriggerAsButton(final XboxController x, final Hand h)
     {
         controller = x;
@@ -25,13 +25,13 @@ public class TriggerAsButton extends Trigger
         //     System.out.println(hand == Hand.kLeft? "!Left trigger!": "!Right trigger!");
         // }
         //TODO: remove after debug
-        if(lastGet != returnVal)
-        {
-            String status = returnVal? "!":"_";
-            String name = hand == Hand.kLeft? "Left trigger": "Right trigger";
-            System.out.println(status + name + status);
-        }
-        lastGet = returnVal;
+        // if(lastGet != returnVal)
+        // {
+        //     String status = returnVal? "!":"_";
+        //     String name = hand == Hand.kLeft? "Left trigger": "Right trigger";
+        //     System.out.println(status + name + status);
+        // }
+        // lastGet = returnVal;
         return returnVal;
     }
 

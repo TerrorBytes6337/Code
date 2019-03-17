@@ -35,7 +35,7 @@ public class ReworkedCamera extends Subsystem
     //     }
     // }
     private static ReworkedCamera instance;
-    public static ReworkedCamera getInstance()
+    public synchronized static ReworkedCamera getInstance()
     {
         if(instance == null)
         {

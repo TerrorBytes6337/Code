@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
     MapUtilityButtons();
     AddUtilityCommands();
     System.out.println("End of robot Init");
-
   }
   
   private void AddUtilityCommands() {
@@ -157,7 +156,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    System.out.println("Disabled init");
+    System.out.println("Disabled init"); 
   }
 
   @Override
@@ -177,7 +176,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    // m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
