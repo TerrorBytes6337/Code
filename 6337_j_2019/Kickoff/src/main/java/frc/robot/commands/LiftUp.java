@@ -1,34 +1,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class LiftUp extends Command {
+public class LiftUp extends InstantCommand {
 
-    private double speed;
-    private boolean stopFinish = false;
+    protected double speed;
+    protected boolean stopFinish = false;
 
     public LiftUp(double speed) {
         this.speed = speed;
     }  
 
-    @Override
-    protected boolean isFinished() {
-        stopExecute();
-        return stopFinish;
-    }
-
     protected void execute() {
         if(speed > 0){
-            Robot.m_LiftingSubsystem.setPositive(speed);
+            Robot.m_LiftingSubsystem.subliftInstance.setPositive(speed);
         }else if (speed < 0){
-            Robot.m_LiftingSubsystem.setNegative(speed);
+            Robot.m_LiftingSubsystem.subliftInstance.setNegative(speed);
         }
-        //TODO: missing:
-        // else
-        // {
-        //     Robot.m_LiftingSubsystem.setSpeed(0);
-        // }
+        else
+        {
+            Robot.m_LiftingSubsystem.subliftInstance.setSpeed(0);
+        }
     }
     
 

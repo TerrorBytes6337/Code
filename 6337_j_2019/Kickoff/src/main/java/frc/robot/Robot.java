@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.subsystems.PID.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,12 +35,15 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   
   public static Driving m_DrivingSubsystem;
-  public static Sublift m_LiftingSubsystem;
+  // public static Sublift m_LiftingSubsystem;
+  public static LiftingSubsystem m_LiftingSubsystem;
   public static CargoHandler cHandler;
   //public static CameraSubsystem m_CameraSubsystem;
   public static PanelPusher m_PanelSubsystem;
   public static Climber m_ClimbingSubsystem;
   //private static final Timer ROBOT_TIMER = new Timer();
+  private double time;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
@@ -64,6 +69,7 @@ public class Robot extends TimedRobot {
   {
     // System.out.println("Mapping Camera Managing buttons");
     // OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
+    OI.AUTONOMOUS_LIFT_TOGGLE.whenActive(new ToggleAutonomousLiftUp());
     //Other debug buttons here
     // OI.EXTERN_0.whenActive(new Extern_UpdateCamSpecs());
   }
@@ -85,10 +91,10 @@ public class Robot extends TimedRobot {
     // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
 
     System.out.println("Mapping Lifting buttons");
-    OI.LIFT_UP_BUTTON.whileHeld(new LiftUp(1));
-    OI.LIFT_UP_BUTTON.whenReleased(new LiftUp(0.15));
-    OI.LIFT_DOWN_BUTTON.whileHeld(new LiftUp(-0.5));
-    OI.LIFT_DOWN_BUTTON.whenReleased(new LiftUp(0.15));
+    OI.LIFT_UP_BUTTON.whileHeld(new AutonomousLiftUp(1, true));
+    OI.LIFT_UP_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));
+    OI.LIFT_DOWN_BUTTON.whileHeld(new AutonomousLiftUp(-0.5, true));
+    OI.LIFT_DOWN_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));
 
     System.out.println("Mapping Cargo Handler buttons");
     OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(0.5));
@@ -108,7 +114,7 @@ public class Robot extends TimedRobot {
   private static void SubsystemInit()
   {
     System.out.println("LiftingSubsystem init");
-    m_LiftingSubsystem = new Sublift();
+    m_LiftingSubsystem = LiftingSubsystem.getInstance();
 
     System.out.println("CargoHandler init");
     cHandler = new CargoHandler();
@@ -147,6 +153,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //Update every 1 sec
+    if(Timer.getFPGATimestamp() - time > 1.0)
+    {
+      ElevatorPID.getInstance().fetchValueFromSmartDashboard();
+      time = Timer.getFPGATimestamp();
+    }
   }
 
   /**
@@ -226,6 +238,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-
+    Scheduler.getInstance().run();
   }
 }

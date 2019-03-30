@@ -5,11 +5,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class Sublift extends Subsystem {
-    public final Spark liftMotor = new Spark(RobotMap.LIFT_MOTOR);
+    public final Spark liftMotor;
     private double negate = 0, positate = 0;
     public Sublift()
     {
         System.out.println("I'm in the sub");
+        liftMotor = new Spark(RobotMap.LIFT_MOTOR);
+    }
+
+    public Sublift(final Spark motor)
+    {
+        liftMotor = motor;
     }
     public Spark liftGetter() {
         return liftMotor;
