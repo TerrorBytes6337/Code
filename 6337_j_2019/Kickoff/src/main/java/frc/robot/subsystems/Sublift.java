@@ -3,18 +3,20 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-
-public class Sublift extends Subsystem {
+//TODO: huge mess, clean up needed
+public class Sublift extends DebugSubsystem {
     public final Spark liftMotor;
     private double negate = 0, positate = 0;
     public Sublift()
     {
+        super();
         System.out.println("I'm in the sub");
         liftMotor = new Spark(RobotMap.LIFT_MOTOR);
     }
 
     public Sublift(final Spark motor)
     {
+        super();
         liftMotor = motor;
     }
     public Spark liftGetter() {
@@ -43,10 +45,12 @@ public class Sublift extends Subsystem {
         if(input >= 0)
         {
             positate = input;
+            negate = 0;
         }
         if(input <= 0)
         {
             negate = input;
+            positate = 0;
         }
         processInput();
     }

@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
     MapUtilityButtons();
     AddUtilityCommands();
     System.out.println("End of robot Init");
+    m_LiftingSubsystem.updateDisplayInfo();
   }
   
   private void AddUtilityCommands() {
@@ -154,10 +155,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //Update every 1 sec
-    if(Timer.getFPGATimestamp() - time > 1.0)
+    double newT = Timer.getFPGATimestamp();
+    if(newT - time > 1.0)
     {
       ElevatorPID.getInstance().fetchValueFromSmartDashboard();
-      time = Timer.getFPGATimestamp();
+      time = newT;
     }
   }
 

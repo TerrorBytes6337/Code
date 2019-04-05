@@ -40,5 +40,8 @@ public class AutonomousLiftUp extends LiftUp
             super.execute();
         }
     }
-    protected static void 
+    @Override
+    protected boolean isFinished(){
+        return true;
+    } 
 }

@@ -5,13 +5,14 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class PanelPusher extends Subsystem
+public class PanelPusher extends DebugSubsystem
 {
     private final Solenoid pushSolenoid;
     private final Solenoid pullSolenoid;
     private final Compressor compressor = new Compressor();
     public PanelPusher()
     {
+        super();
         pushSolenoid = new Solenoid(RobotMap.PANEL_PUSH);
         pullSolenoid = new Solenoid(RobotMap.PANEL_PULL);
     }

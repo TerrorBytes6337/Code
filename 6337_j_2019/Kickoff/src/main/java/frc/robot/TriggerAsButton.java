@@ -19,12 +19,14 @@ public class TriggerAsButton extends Trigger
     @Override
     public boolean get() {
         boolean returnVal = controller.getTriggerAxis(hand) > DEFAULT_TRIGGER_VALUE;
+        //TODO: remove after debug
+        //System.out.println(hand == Hand.kLeft? "!Left trigger!": "!Right trigger!");
         // if(returnVal && lastGet == false)
         // {   
         //     //TODO: remove this when finished debugging
         //     System.out.println(hand == Hand.kLeft? "!Left trigger!": "!Right trigger!");
         // }
-        //TODO: remove after debug
+        // //TODO: remove after debug
         // if(lastGet != returnVal)
         // {
         //     String status = returnVal? "!":"_";

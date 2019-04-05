@@ -10,7 +10,7 @@ import frc.robot.RobotMap;
 
 
 //TODO: IMPLEMENT GOOD TELEOP/AUTONOMOUS
-public class ElevatorPID extends PIDSubsystem 
+public class ElevatorPID extends DebugPIDSubsystem 
 {	
 	private static double minInput = 0.0;
 	private static double maxInput = 3850.0;
@@ -42,7 +42,7 @@ public class ElevatorPID extends PIDSubsystem
 		PPR = newPPR;
 		updateLPP();
 	}
-	private SD_Number motorRadius = new SD_Number(11,"ElevatorPID.motorRadius");
+	private SD_Number motorRadius = new SD_Number(1.5,"ElevatorPID.motorRadius");
 	public void setMotorRadius(double motorRadius)
 	{
 		this.motorRadius = new SD_Number(motorRadius, "ElevatorPID.motorRadius");
@@ -291,7 +291,7 @@ public class ElevatorPID extends PIDSubsystem
 			//System.out.println(name+" updated.");
 		}
 	}
-    protected void updateDisplayInfo(){
+    public void updateDisplayInfo(){
 		//SmartDashboard.putData("elevatorEncoder", elevatorEncoder);
 
 		// //These are called by getInfoFromSD()

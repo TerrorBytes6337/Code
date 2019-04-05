@@ -5,6 +5,10 @@ import frc.robot.subsystems.LiftingSubsystem;
 
 public class ToggleAutonomousLiftUp extends InstantCommand
 {
+    public ToggleAutonomousLiftUp()
+    {
+        requires(LiftingSubsystem.getInstance());
+    }
     public void execute()
     {
         LiftingSubsystem.getInstance().toggleAutonomousLift();

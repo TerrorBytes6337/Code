@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-public class Driving extends Subsystem
+public class Driving extends DebugSubsystem
 {
     public final DifferentialDrive driver;
     private final Spark LEFT_CONTROLLER;
@@ -15,6 +15,7 @@ public class Driving extends Subsystem
     private static final Hand HORIZONTAL_HAND = Hand.kRight;
     public Driving()
     {
+        super();
         LEFT_CONTROLLER = new Spark(RobotMap.PORT_LEFT_WHEEL_MOTOR);
         RIGHT_CONTROLLER = new Spark(RobotMap.PORT_RIGHT_WHEEL_MOTOR);
         driver = new DifferentialDrive(LEFT_CONTROLLER, RIGHT_CONTROLLER);

@@ -5,12 +5,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class Climber extends Subsystem
+public class Climber extends DebugSubsystem
 {
     private final DoubleSolenoid frontLeg;
     private final DoubleSolenoid backLeg;
     public Climber()
     {
+        super();
         frontLeg = new DoubleSolenoid(RobotMap.CLIMBER_FRONT_PULL, RobotMap.CLIMBER_FRONT_PUSH);
         backLeg = new DoubleSolenoid(RobotMap.CLIMBER_BACK_PULL, RobotMap.CLIMBER_BACK_PUSH);
     }

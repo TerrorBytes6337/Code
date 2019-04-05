@@ -5,7 +5,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //TODO: [ENDGAME] Add multiple cameras support
-public class ReworkedCamera extends Subsystem
+public class ReworkedCamera extends DebugSubsystem
 {
     // public class CameraSpecifications
     // {
@@ -49,6 +49,7 @@ public class ReworkedCamera extends Subsystem
     // private CameraSpecifications camSpecs;
     public ReworkedCamera()
     {
+        super();
         mainCam = CameraServer.getInstance().startAutomaticCapture();
         // camSpecs = new CameraSpecifications();
         // camSpecs.putDataToDashboard();
