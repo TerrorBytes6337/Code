@@ -7,7 +7,6 @@ import frc.robot.Robot;
 public class LiftUp extends InstantCommand {
 
     protected double speed;
-    protected boolean stopFinish = false;
 
     public LiftUp(double speed) {
         this.speed = speed;
@@ -22,14 +21,6 @@ public class LiftUp extends InstantCommand {
         else
         {
             Robot.m_LiftingSubsystem.subliftInstance.setSpeed(0);
-        }
-    }
-    
-
-    public void stopExecute() {
-        if(speed == 0){
-            Robot.m_LiftingSubsystem.stop();
-            stopFinish = true;
         }
     }
 }

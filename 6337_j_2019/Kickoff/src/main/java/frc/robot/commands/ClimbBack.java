@@ -8,10 +8,21 @@ import frc.robot.Robot;
 public class ClimbBack extends InstantCommand
 {
     private boolean on;
+    private static final boolean ON_BY_DEFAULT = false;
     public ClimbBack()
     {
-        on = false;
-
+        switch(Robot.m_ClimbingSubsystem.getBack())
+        {
+            case kForward:
+                on = true;
+                break;
+            case kReverse:
+                on = false;
+                break;
+            default:
+                on = ON_BY_DEFAULT;
+                break;
+        }
         // System.out.println("back climber up");
         // Value val = on ? Value.kForward: Value.kReverse;
         // Robot.m_ClimbingSubsystem.setBackLeg(val);

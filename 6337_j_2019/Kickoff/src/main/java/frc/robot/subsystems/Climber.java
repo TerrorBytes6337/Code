@@ -12,11 +12,16 @@ public class Climber extends DebugSubsystem
 {
     private final DoubleSolenoid frontLeg;
     private final DoubleSolenoid backLeg;
+    private static final Value DEFAULT_VALUE = Value.kReverse;
     public Climber()
     {
         super();
         frontLeg = new DoubleSolenoid(RobotMap.CLIMBER_FRONT_PULL, RobotMap.CLIMBER_FRONT_PUSH);
         backLeg = new DoubleSolenoid(RobotMap.CLIMBER_BACK_PULL, RobotMap.CLIMBER_BACK_PUSH);
+
+        //set default value to be in, not out.
+        frontLeg.set(DEFAULT_VALUE);
+        backLeg.set(DEFAULT_VALUE);
     }
     @Override
     protected void initDefaultCommand() {
@@ -25,6 +30,14 @@ public class Climber extends DebugSubsystem
     public void setFrontLeg(Value val)
     {
         frontLeg.set(val);
+    }
+    public Value getFront()
+    {
+        return frontLeg.get();
+    }
+    public Value getBack()
+    {
+        return backLeg.get();
     }
     public void setBackLeg(Value val)
     {
