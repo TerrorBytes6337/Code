@@ -18,7 +18,6 @@ public final class Main {
   private Main() {
   }
   public static final boolean IS_DEBUG = false;
-
   /**
    * Main initialization function. Do not perform any initialization here.
    *
@@ -27,7 +26,7 @@ public final class Main {
   public static void main(String... args) {
     if(IS_DEBUG)
     {
-      RobotBase.startRobot(RobotForDebug::new);
+      RobotBase.startRobot(DebugRobot::new);
     }
     else
     {

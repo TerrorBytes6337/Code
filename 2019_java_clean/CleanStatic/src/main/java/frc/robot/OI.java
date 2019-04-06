@@ -7,13 +7,20 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.SpeedController;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.Robot;
+//TODO: if xbox is not used, handle errors.
 public class OI {
-
-  //#region built-in tutorials
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -41,9 +48,6 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-  //#endregion
-  
-  //#region Ports
   public static final int PORT_XBOX_CONTROLLER = 0;
   public static final Hand LIFT_HAND = Hand.kRight;
   public static final int PANEL_PUSH_BUTTON_CLOSE = 10; //right joystick
@@ -56,9 +60,8 @@ public class OI {
   public static final int CARGO_HANDLER_OUT = 2; //B button shoot the ball out
   public static final int CARGO_HANDLER_UP = 1; //Y button, put the handler up
   public static final int CARGO_HANDLER_DOWN = 4; //A button, put the handler down
-  //public static final int LIFT_DOWN_BUTTON_AXES = 3; //Right side trigger
 
-  ////#endregion
+  //public static final int LIFT_DOWN_BUTTON_AXES = 3; //Right side trigger
 
   public static final XboxController XBOX_CONTROLLER;
   public static final Button PANEL_BUTTON_CLOSE;
@@ -108,3 +111,4 @@ public class OI {
   }
 
 }
+
