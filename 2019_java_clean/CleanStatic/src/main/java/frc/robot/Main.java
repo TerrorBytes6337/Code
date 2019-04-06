@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 public final class Main {
   private Main() {
   }
+  public static final boolean IS_DEBUG = false;
 
   /**
    * Main initialization function. Do not perform any initialization here.
@@ -24,6 +25,13 @@ public final class Main {
    * <p>If you change your main robot class, change the parameter type.
    */
   public static void main(String... args) {
-    RobotBase.startRobot(Robot::new);
+    if(IS_DEBUG)
+    {
+      RobotBase.startRobot(RobotForDebug::new);
+    }
+    else
+    {
+      RobotBase.startRobot(Robot::new);
+    }
   }
 }
