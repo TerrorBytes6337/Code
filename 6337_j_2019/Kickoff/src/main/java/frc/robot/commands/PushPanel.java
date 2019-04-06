@@ -6,7 +6,9 @@ import frc.robot.Robot;
 //Singleton
 public class PushPanel extends Command
 {
-    private boolean push;
+    private static boolean push;
+    public static boolean getPush() {return push;}
+    public static void setPush(boolean b) {push = b;}
     public PushPanel(boolean push)
     {
         requires(Robot.m_PanelSubsystem);

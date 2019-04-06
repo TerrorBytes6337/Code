@@ -33,14 +33,21 @@ import frc.robot.subsystems.PID.*;
 public class Robot extends TimedRobot {
   //public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
-  
+
+
+  //#region Subsystems
   public static Driving m_DrivingSubsystem;
   // public static Sublift m_LiftingSubsystem;
   public static LiftingSubsystem m_LiftingSubsystem;
-  public static CargoHandler cHandler;
+  public static CargoHandler m_cargoHandlerSubsystem;
   //public static CameraSubsystem m_CameraSubsystem;
   public static PanelPusher m_PanelSubsystem;
   public static Climber m_ClimbingSubsystem;
+  public static ReworkedCamera m_CameraSubsystem;
+  //#endregion
+
+
+
   //private static final Timer ROBOT_TIMER = new Timer();
   private double time;
 
@@ -59,7 +66,7 @@ public class Robot extends TimedRobot {
     MapUtilityButtons();
     AddUtilityCommands();
     System.out.println("End of robot Init");
-    m_LiftingSubsystem.updateDisplayInfo();
+    //m_LiftingSubsystem.updateDisplayInfo();
   }
   
   private void AddUtilityCommands() {
@@ -109,7 +116,8 @@ public class Robot extends TimedRobot {
     OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
 
     System.out.println("Adding arcade drive command to scheduler");
-    Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
+    // Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
+    Scheduler.getInstance().add(new ArcadeDrive());
   }
   
   private static void SubsystemInit()
@@ -118,7 +126,7 @@ public class Robot extends TimedRobot {
     m_LiftingSubsystem = LiftingSubsystem.getInstance();
 
     System.out.println("CargoHandler init");
-    cHandler = new CargoHandler();
+    m_cargoHandlerSubsystem = new CargoHandler();
     System.out.println("Driving system init");
     m_DrivingSubsystem = new Driving();
     // System.out.println("Camera subsystem init");
@@ -130,7 +138,7 @@ public class Robot extends TimedRobot {
     m_ClimbingSubsystem = new Climber();
 
     System.out.println("Camera init");
-    ReworkedCamera.getInstance();
+    m_CameraSubsystem = new ReworkedCamera();
     //CameraServer.getInstance().startAutomaticCapture();
     // Camera.getInstance();
     
@@ -155,12 +163,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //Update every 1 sec
-    double newT = Timer.getFPGATimestamp();
-    if(newT - time > 1.0)
-    {
-      ElevatorPID.getInstance().fetchValueFromSmartDashboard();
-      time = newT;
-    }
+    // double newT = Timer.getFPGATimestamp();
+    // if(newT - time > 1.0)
+    // {
+    //   ElevatorPID.getInstance().fetchValueFromSmartDashboard();
+    //   time = newT;
+    // }
   }
 
   /**

@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.helper.GS;
 //TODO: [ENDGAME] Add multiple cameras support
 public class ReworkedCamera extends DebugSubsystem
 {
@@ -34,18 +36,14 @@ public class ReworkedCamera extends DebugSubsystem
     //         cam.setResolution(160 * (1<<(int) scale), 90 * (1<<(int) scale));
     //     }
     // }
-    private static ReworkedCamera instance;
-    public synchronized static ReworkedCamera getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new ReworkedCamera();
-        }
-        return instance;
-    }
     private final UsbCamera mainCam;
-    private static final int SCALER = 0;
-    private static final int FRAMERATE = 60;
+    private static GS<Integer> SCALER = new GS<Integer>();
+    private static GS<Integer> FRAMERATE = new GS<Integer>();
+    static
+    {
+        SCALER.set(0);
+        FRAMERATE.set(30);
+    }
     // private CameraSpecifications camSpecs;
     public ReworkedCamera()
     {
@@ -54,8 +52,8 @@ public class ReworkedCamera extends DebugSubsystem
         // camSpecs = new CameraSpecifications();
         // camSpecs.putDataToDashboard();
         // camSpecs.updateFromDashboard(mainCam);
-        mainCam.setFPS(FRAMERATE);
-        mainCam.setResolution(160 * (1 <<SCALER), 90 * (1 << SCALER));
+        mainCam.setFPS(FRAMERATE.get());
+        mainCam.setResolution(160 * (1 <<SCALER.get()), 90 * (1 << SCALER.get()));
     }
     @Override
     protected void initDefaultCommand() {
@@ -65,5 +63,11 @@ public class ReworkedCamera extends DebugSubsystem
     {
         // camSpecs.updateFromDashboard(mainCam);
     }
+
+    @Override
+    public void addInfoToSendable(SendableBuilder b) {
+        addProperty(b, ".targetFramerate", FRAMERATE::get, FRAMERATE::set);
+        addProperty(b, ".scaler", SCALER::get, SCALER::set);
+	}
 
 }

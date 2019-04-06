@@ -1,9 +1,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+
+import java.util.function.DoubleConsumer;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder.BooleanConsumer;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 public class Driving extends DebugSubsystem
@@ -43,9 +48,25 @@ public class Driving extends DebugSubsystem
         return OI.XBOX_CONTROLLER.getY(VERTICAL_HAND);
         //return -OI.XBOX_CONTROLLER.getRawAxis(1);
     }
+    public void setForwardXbox(double d)
+    {
+        //Do nothing;
+    }
     public double getRightXbox()
     {
         return OI.XBOX_CONTROLLER.getX(HORIZONTAL_HAND);
-        //return OI.XBOX_CONTROLLER.getRawAxis(4);
+        // return OI.XBOX_CONTROLLER.getRawAxis(4);
     }
+    public void setRightXbox(double d)
+    {
+        //Do nothing;
+    }
+
+    @Override
+    public void addInfoToSendable(SendableBuilder b) {
+        addProperty(b, ".Xbox.x", this::getRightXbox, this::setRightXbox);
+        addProperty(b, ".Xbox.y", this::getForwardXbox, this::setForwardXbox);
+        addProperty(b, ".leftController.speed", LEFT_CONTROLLER::get, LEFT_CONTROLLER::set);
+        addProperty(b, ".rightController.speed", RIGHT_CONTROLLER::get, RIGHT_CONTROLLER::set);
+	}
 }

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.PID.ElevatorPID;
 
@@ -9,9 +10,18 @@ public class LiftingSubsystem extends ElevatorPID
     public final Sublift subliftInstance;
     private boolean isAutonomous;
     private boolean readyToOperate = false;
+    public boolean isReadyToOperate() {return readyToOperate;}
+    public void setReadyToOperate(boolean val) 
+    {
+        readyToOperate = val;
+    }
     public boolean isAuto()
     {
         return isAutonomous;
+    }
+    private void setAuto(boolean isAuto)
+    {
+        isAutonomous = isAuto;
     }
     public static LiftingSubsystem getInstance()
     {
@@ -81,11 +91,21 @@ public class LiftingSubsystem extends ElevatorPID
         }
     }
     @Override
-    public void updateDisplayInfo()
+    public void addInfoToSendable(SendableBuilder b)
     {
-        super.updateDisplayInfo();
-        SmartDashboard.putBoolean("LiftingSubsystem.isAuto()", isAutonomous);
-        SmartDashboard.putBoolean("LiftingSubsystem.getController().enabled", this.getPIDController().isEnabled());
+        super.addInfoToSendable(b);
+        addProperty(b, ".isAuto", this::isAuto, this::setAuto);
+        addProperty(b, ".controller.enabled", this.getPIDController()::isEnabled,
+        this.getPIDController()::setEnabled);
+        addProperty(b, ".needsToReleaseButton", this::isReadyToOperate, 
+        this::setReadyToOperate);
+        addProperty(b, ".teleopLiftSpeed", subliftInstance::getSpeed, subliftInstance::setSpeed);
     }
+    // public void updateDisplayInfo()
+    // {
+    //     super.updateDisplayInfo();
+    //     SmartDashboard.putBoolean("LiftingSubsystem.isAuto()", isAutonomous);
+    //     SmartDashboard.putBoolean("LiftingSubsystem.getController().enabled", this.getPIDController().isEnabled());
+    // }
     
 }

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 //TODO: huge mess, clean up needed
-public class Sublift extends DebugSubsystem {
+public class Sublift extends Subsystem {
     public final Spark liftMotor;
     private double negate = 0, positate = 0;
     public Sublift()
@@ -54,7 +54,10 @@ public class Sublift extends DebugSubsystem {
         }
         processInput();
     }
-
+    public double getSpeed()
+    {
+        return positate+negate;
+    }
     public void stop(){
 
         negate = 0;
