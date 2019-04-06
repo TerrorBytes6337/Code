@@ -17,7 +17,7 @@ public class CargoGetBall extends Command {
     }
 
     public void execute(){
-        Robot.cHandler.cargoGetBall().set(speed);
+        Robot.m_cargoHandlerSubsystem.cargoGetBall().set(speed);
         //Robot.cHandler.cargoRight().set(-1 * speed);
     }
 }

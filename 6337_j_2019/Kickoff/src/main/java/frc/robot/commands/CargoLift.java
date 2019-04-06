@@ -13,7 +13,7 @@ public class CargoLift extends InstantCommand {
     }
 
     public void execute(){
-        Robot.cHandler.cargoLift().set(speed);
+        Robot.m_cargoHandlerSubsystem.cargoLift().set(speed);
         //Robot.cHandler.cargoRight().set(-1 * speed);
     }
 }
