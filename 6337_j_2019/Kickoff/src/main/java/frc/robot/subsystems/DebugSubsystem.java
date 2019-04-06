@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder.BooleanConsumer;
 import frc.helper.GS;
 
-public abstract class DebugSubsystem extends Subsystem
+public abstract class DebugSubsystem extends CentralizedSubsystem
 {
     public DebugSubsystem()
     {
@@ -18,6 +18,7 @@ public abstract class DebugSubsystem extends Subsystem
     public final void initSendable(SendableBuilder builder)
     {
         super.initSendable(builder);
+        System.out.println("DebugSubsystem initSendable() called.");
         addInfoToSendable(builder);
     }
     //#region COMPILER HACK

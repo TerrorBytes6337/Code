@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 public final class Main {
   private Main() {
   }
-
+  public static final boolean IS_DEBUG = false;
   /**
    * Main initialization function. Do not perform any initialization here.
    *

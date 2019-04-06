@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.SendableBase;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -60,11 +61,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    smartDashboardInit();
     SubsystemInit();
 
     MapUtilityButtons();
     AddUtilityCommands();
+    smartDashboardInit();
     System.out.println("End of robot Init");
     //m_LiftingSubsystem.updateDisplayInfo();
   }
@@ -143,7 +144,7 @@ public class Robot extends TimedRobot {
     // Camera.getInstance();
     
   }
-  private void smartDashboardInit() {
+  public void smartDashboardInit() {
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);

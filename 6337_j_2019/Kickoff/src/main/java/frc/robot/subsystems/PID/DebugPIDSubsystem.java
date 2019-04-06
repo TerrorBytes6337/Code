@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder.BooleanConsumer;
 import frc.helper.GS;
 
-public abstract class DebugPIDSubsystem extends PIDSubsystem
+public abstract class DebugPIDSubsystem extends CentralizedPIDSubsystem
 {
     public DebugPIDSubsystem(String name, double p, double i, double d, double f)
     {
