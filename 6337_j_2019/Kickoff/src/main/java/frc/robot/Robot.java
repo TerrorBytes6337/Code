@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
   //public static CameraSubsystem m_CameraSubsystem;
   public static PanelPusher m_PanelSubsystem;
   public static Climber m_ClimbingSubsystem;
-  public static ReworkedCamera m_CameraSubsystem;
+  //public static ReworkedCamera m_CameraSubsystem;
   //#endregion
 
 
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   //private static final Timer ROBOT_TIMER = new Timer();
   private double time;
 
-  Command m_autonomousCommand;
+ // Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be
@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
   {
     // System.out.println("Mapping Camera Managing buttons");
     // OI.SWITCH_CAMERA_BUTTON.whenActive(new SwitchCamera());
-    OI.AUTONOMOUS_LIFT_TOGGLE.whenActive(new ToggleAutonomousLiftUp());
+    //OI.AUTONOMOUS_LIFT_TOGGLE.whenActive(new ToggleAutonomousLiftUp());
     //Other debug buttons here
     // OI.EXTERN_0.whenActive(new Extern_UpdateCamSpecs());
   }
@@ -100,10 +100,10 @@ public class Robot extends TimedRobot {
     // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
 
     System.out.println("Mapping Lifting buttons");
-    OI.LIFT_UP_BUTTON.whileHeld(new AutonomousLiftUp(1, true));
+   /* OI.LIFT_UP_BUTTON.whileHeld(new AutonomousLiftUp(1, true));
     OI.LIFT_UP_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));
     OI.LIFT_DOWN_BUTTON.whileHeld(new AutonomousLiftUp(-0.5, true));
-    OI.LIFT_DOWN_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));
+    OI.LIFT_DOWN_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));*/
 
     System.out.println("Mapping Cargo Handler buttons");
     OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(0.5));
@@ -111,9 +111,9 @@ public class Robot extends TimedRobot {
     OI.CARGO_HANDLER_UP_BUTTON.whileActive(new CargoLift(-0.5));
     OI.CARGO_HANDLER_UP_BUTTON.whenReleased(new CargoLift(0.1));
 
-    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(1));
+    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(0.5));
     OI.CARGO_HANDLER_IN_BUTTON.whenReleased(new CargoGetBall(0));
-    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.5));
+    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.25));
     OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
 
     System.out.println("Adding arcade drive command to scheduler");
@@ -138,8 +138,8 @@ public class Robot extends TimedRobot {
     System.out.println("Climber init");
     m_ClimbingSubsystem = new Climber();
 
-    System.out.println("Camera init");
-    m_CameraSubsystem = new ReworkedCamera();
+    //System.out.println("Camera init");
+    //m_CameraSubsystem = new ReworkedCamera();
     //CameraServer.getInstance().startAutomaticCapture();
     // Camera.getInstance();
     

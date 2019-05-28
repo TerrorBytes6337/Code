@@ -92,8 +92,8 @@ public class ElevatorPID extends DebugPIDSubsystem
 	public void updatePIDF()
 	{
 		// getPIDController().setPID(PIDInfo.p, PIDInfo.i, PIDInfo.d, PIDInfo.f);
-		getPIDController().setPID(p.get(),i.get(),d.get(),f.get());
-		System.out.println("PIDF system updated.");
+		//getPIDController().setPID(p.get(),i.get(),d.get(),f.get());
+		//System.out.println("PIDF system updated.");
 	}
 
 	public void resetEncoder() {
@@ -113,12 +113,12 @@ public class ElevatorPID extends DebugPIDSubsystem
 		// this.setOutputRange(minOutput.value, maxOutput.value);
 		// this.enable();
 
-		this.setAbsoluteTolerance(absoluteTolerance.get());
-		this.getPIDController().setContinuous(false);
-		this.setSetpoint(setPoints.get()[0]);
-		this.setInputRange(minInput.get(), maxInput.get());
-		this.setOutputRange(minOutput.get(), maxOutput.get());
-		this.enable();
+		//this.setAbsoluteTolerance(absoluteTolerance.get());
+		//this.getPIDController().setContinuous(false);
+		//this.setSetpoint(setPoints.get()[0]);
+		//this.setInputRange(minInput.get(), maxInput.get());
+		//this.setOutputRange(minOutput.get(), maxOutput.get());
+		//this.enable();
 		
 		//updateDisplayInfo();
 	}
@@ -220,18 +220,18 @@ public class ElevatorPID extends DebugPIDSubsystem
 	}
 	@Override
 	public void addInfoToSendable(SendableBuilder b) {
-		addProperty(b, ".minInput", minInput::get, minInput::set);
-		addProperty(b, ".maxInput", maxInput::get, maxInput::set);
-		addProperty(b, ".minOutput", minOutput::get, minOutput::set);
-		addProperty(b, ".maxOutput", maxOutput::get, maxOutput::set);
-		addProperty(b, ".absoluteTolerance", absoluteTolerance::get, absoluteTolerance::set);
-		addProperty(b, ".setPoints", setPoints);
-		addProperty(b, ".currentSetPointIndex", currentSetPointIndex::get, currentSetPointIndex::set);
-		addProperty(b, ".motorRadius", this::getMotorRadius, this::setMotorRadius);
-		addProperty(b, ".p", p::get, p::set);
-		addProperty(b, ".i", i::get, i::set);
-		addProperty(b, ".d", d::get, d::set);
-		addProperty(b, ".f", f::get, f::set);
+		// addProperty(b, ".minInput", minInput::get, minInput::set);
+		// addProperty(b, ".maxInput", maxInput::get, maxInput::set);
+		// addProperty(b, ".minOutput", minOutput::get, minOutput::set);
+		// addProperty(b, ".maxOutput", maxOutput::get, maxOutput::set);
+		// addProperty(b, ".absoluteTolerance", absoluteTolerance::get, absoluteTolerance::set);
+		// addProperty(b, ".setPoints", setPoints);
+		// addProperty(b, ".currentSetPointIndex", currentSetPointIndex::get, currentSetPointIndex::set);
+		// addProperty(b, ".motorRadius", this::getMotorRadius, this::setMotorRadius);
+		// addProperty(b, ".p", p::get, p::set);
+		// addProperty(b, ".i", i::get, i::set);
+		// addProperty(b, ".d", d::get, d::set);
+		// addProperty(b, ".f", f::get, f::set);
 	}
 	//#region old code
 // //SmartDashboard

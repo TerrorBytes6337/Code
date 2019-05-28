@@ -76,7 +76,7 @@ public class OI {
   public static final Button CARGO_HANDLER_DOWN_BUTTON;
   //public static final TriggerAsButton LIFT_DOWN_BUTTON; //Technically treated like a button
   
-  public static final TriggerAsButton AUTONOMOUS_LIFT_TOGGLE;
+  //public static final TriggerAsButton AUTONOMOUS_LIFT_TOGGLE;
 
   // public static final POVAsButton EXTERN_0;
   // public static final POVAsButton EXTERN_1;
@@ -99,7 +99,7 @@ public class OI {
     CARGO_HANDLER_DOWN_BUTTON = new JoystickButton(XBOX_CONTROLLER, CARGO_HANDLER_DOWN);
     LIFT_UP_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_UP_BUTTON_NUM);
     LIFT_DOWN_BUTTON = new JoystickButton(XBOX_CONTROLLER, LIFT_DOWN_BUTTON_NUM);
-    AUTONOMOUS_LIFT_TOGGLE = new TriggerAsButton(XBOX_CONTROLLER, Hand.kRight); //Right trigger
+    //AUTONOMOUS_LIFT_TOGGLE = new TriggerAsButton(XBOX_CONTROLLER, Hand.kRight); //Right trigger
     // EXTERN_0 = new POVAsButton(0);
     // EXTERN_1 = new POVAsButton(1);
     // EXTERN_2 = new POVAsButton(2);

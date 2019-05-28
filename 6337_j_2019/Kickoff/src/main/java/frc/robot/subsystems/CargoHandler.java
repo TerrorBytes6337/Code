@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.RobotMap;
 
-public class CargoHandler extends DebugSubsystem{
+public class CargoHandler extends Subsystem{
     private PWMSpeedController cargoLiftController = new Spark(RobotMap.CARGO_HANDLER_UP_DOWN);
 
     public PWMSpeedController cargoLift(){
@@ -22,13 +22,13 @@ public class CargoHandler extends DebugSubsystem{
         return cargoBallController;
     }
 
-    @Override
-    public void addInfoToSendable(SendableBuilder b) {
-        addProperty(b, ".cargoLift.speed", cargoLiftController::get,
-        cargoLiftController::set);
-        addProperty(b, ".cargoBall.speed", cargoBallController::get,
-        cargoBallController::set);
-	}
+    // @Override
+    // public void addInfoToSendable(SendableBuilder b) {
+    //     addProperty(b, ".cargoLift.speed", cargoLiftController::get,
+    //     cargoLiftController::set);
+    //     addProperty(b, ".cargoBall.speed", cargoBallController::get,
+    //     cargoBallController::set);
+	// }
 
 }
 

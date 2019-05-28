@@ -30,12 +30,12 @@ public abstract class DebugPIDSubsystem extends CentralizedPIDSubsystem
     {
         b.addDoubleProperty(name, sup, con);
     }
-    public void addProperty(SendableBuilder b, String name, IntSupplier sup, IntConsumer con)
-    {
-        DoubleSupplier dSup = (DoubleSupplier) sup;
-        DoubleConsumer dCon = (DoubleConsumer) con;
-        b.addDoubleProperty(name, dSup, dCon);
-    }    
+    // public void addProperty(SendableBuilder b, String name, IntSupplier sup, IntConsumer con)
+    // {
+    //     // DoubleSupplier dSup = (DoubleSupplier) sup;
+    //     // DoubleConsumer dCon = (DoubleConsumer) con;
+    //     // b.addDoubleProperty(name, dSup, dCon);
+    // }    
     public void addProperty(SendableBuilder b, String name, Supplier<String> sup, Consumer<String> con)
     {
         b.addStringProperty(name, sup, con);

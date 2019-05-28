@@ -1,4 +1,4 @@
-package frc.robot.commands;
+/*package frc.robot.commands;
 
 import frc.robot.subsystems.LiftingSubsystem;
 import frc.robot.subsystems.PID.ElevatorPID;
@@ -45,3 +45,4 @@ public class AutonomousLiftUp extends LiftUp
         return true;
     } 
 }
+*/

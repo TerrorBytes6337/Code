@@ -57,7 +57,7 @@ public class LiftingSubsystem extends ElevatorPID
     public void sendUpSignal(double speed)
     {
         //go down
-        if(isAutonomous)
+        /*if(isAutonomous)
         {
             if(readyToOperate)
             {
@@ -66,9 +66,9 @@ public class LiftingSubsystem extends ElevatorPID
             }
         }
         else
-        {
+        {*/
             subliftInstance.setSpeed(speed);
-        }
+        //}
     }
     public void sendReleaseSignal(double conteractSpeed)
     {
@@ -77,7 +77,7 @@ public class LiftingSubsystem extends ElevatorPID
     public void sendDownSignal(double speed)
     {
         //go down
-        if(isAutonomous)
+     /*   if(isAutonomous)
         {
             if(readyToOperate)
             {
@@ -86,9 +86,9 @@ public class LiftingSubsystem extends ElevatorPID
             }
         }
         else
-        {
+        {*/
             subliftInstance.setSpeed(speed);
-        }
+        //}
     }
     @Override
     public void addInfoToSendable(SendableBuilder b)

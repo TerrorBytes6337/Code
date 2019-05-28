@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.RobotMap;
 import frc.robot.commands.PushPanel;
 
-public class PanelPusher extends DebugSubsystem
+public class PanelPusher extends //DebugSubsystem
+Subsystem
 {
     private final Solenoid pushSolenoid;
     private final Solenoid pullSolenoid;
@@ -50,10 +51,10 @@ public class PanelPusher extends DebugSubsystem
     protected void initDefaultCommand() {
 
     }
-    @Override
-    public void addInfoToSendable(SendableBuilder b) {
-        addProperty(b, ".pushing", PushPanel::getPush, PushPanel::setPush);
+    // @Override
+    // public void addInfoToSendable(SendableBuilder b) {
+    //     addProperty(b, ".pushing", PushPanel::getPush, PushPanel::setPush);
 
-	}
+	// }
 
 }

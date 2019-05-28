@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.RobotMap;
 
-public class Climber extends DebugSubsystem
+public class Climber extends //DebugSubsystem
+Subsystem
 {
     private final DoubleSolenoid frontLeg;
     private final DoubleSolenoid backLeg;
@@ -81,9 +82,9 @@ public class Climber extends DebugSubsystem
     {
         backLeg.set(lookup.get(inp));
     }
-    @Override
-    public void addInfoToSendable(SendableBuilder b) {
-        addProperty(b, ".frontLeg.value", this::getValueFront, this::setValueFront);
-        addProperty(b, ".backLeg.value", this::getValueBack, this::setValueBack);
-    }
+    // @Override
+    // public void addInfoToSendable(SendableBuilder b) {
+    //     addProperty(b, ".frontLeg.value", this::getValueFront, this::setValueFront);
+    //     addProperty(b, ".backLeg.value", this::getValueBack, this::setValueBack);
+    // }
 }
