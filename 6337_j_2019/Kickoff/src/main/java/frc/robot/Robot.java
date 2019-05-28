@@ -47,6 +47,8 @@ public class Robot extends TimedRobot {
   //public static ReworkedCamera m_CameraSubsystem;
   //#endregion
 
+  //Prevents Garbage Collection bs
+  public static ArcadeDrive driveCommand;
 
 
   //private static final Timer ROBOT_TIMER = new Timer();
@@ -118,7 +120,8 @@ public class Robot extends TimedRobot {
 
     System.out.println("Adding arcade drive command to scheduler");
     // Scheduler.getInstance().add(new ArcadeDrive(0.3,1));
-    Scheduler.getInstance().add(new ArcadeDrive());
+    driveCommand = new ArcadeDrive();
+    Scheduler.getInstance().add(driveCommand);
   }
   
   private static void SubsystemInit()
@@ -242,6 +245,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //System.out.println("Updated.");
   }
 
   /**

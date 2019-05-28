@@ -87,6 +87,10 @@ import frc.robot.Robot;
 
 public class ArcadeDrive extends InstantCommand
 {
+    public ArcadeDrive()
+    {
+        System.out.println("Arcade Drive command constructor is called.");
+    }
     @Override
     public void execute()
     {
@@ -97,5 +101,4 @@ public class ArcadeDrive extends InstantCommand
 
         Robot.m_DrivingSubsystem.driver.arcadeDrive(xSpeed, zRotation);
     }
-
 }
