@@ -97,7 +97,7 @@ public class ArcadeDrive extends InstantCommand
         double xSpeed = -Robot.m_DrivingSubsystem.getForwardXbox();
         double zRotation = Robot.m_DrivingSubsystem.getRightXbox();
 
-        System.out.println("xbox: {"+xSpeed+", "+zRotation+"}");
+        //System.out.println("xbox: {"+xSpeed+", "+zRotation+"}");
 
         Robot.m_DrivingSubsystem.driver.arcadeDrive(xSpeed, zRotation);
     }

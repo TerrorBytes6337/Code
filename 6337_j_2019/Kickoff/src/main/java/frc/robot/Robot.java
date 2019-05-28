@@ -245,6 +245,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    Scheduler.getInstance().add(driveCommand);
     //System.out.println("Updated.");
   }
 

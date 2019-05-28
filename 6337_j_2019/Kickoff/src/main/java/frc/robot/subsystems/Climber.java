@@ -58,31 +58,31 @@ Subsystem
                 return "?";
         }
     }
-    public static final HashMap<String,Value> lookup = new HashMap<>();
-    static
-    {
-        lookup.put("on", Value.kForward);
-        lookup.put("off", Value.kReverse);
-        lookup.put("disabled", Value.kOff);
-    }
-    public String getValueFront()
-    {
-        return fromValue(frontLeg.get());
-    }
-    public void setValueFront(String inp)
-    {
-        frontLeg.set(lookup.get(inp));
-    }
+    // public static final HashMap<String,Value> lookup = new HashMap<>();
+    // static
+    // {
+    //     lookup.put("on", Value.kForward);
+    //     lookup.put("off", Value.kReverse);
+    //     lookup.put("disabled", Value.kOff);
+    // }
+    // public String getValueFront()
+    // {
+    //     return fromValue(frontLeg.get());
+    // }
+    // public void setValueFront(String inp)
+    // {
+    //     frontLeg.set(lookup.get(inp));
+    // }
 
-    public String getValueBack()
-    {
-        return fromValue(backLeg.get());
-    }    
-    public void setValueBack(String inp)
-    {
-        backLeg.set(lookup.get(inp));
-    }
-    // @Override
+    // public String getValueBack()
+    // {
+    //     return fromValue(backLeg.get());
+    // }    
+    // public void setValueBack(String inp)
+    // {
+    //     backLeg.set(lookup.get(inp));
+    // }
+    // // @Override
     // public void addInfoToSendable(SendableBuilder b) {
     //     addProperty(b, ".frontLeg.value", this::getValueFront, this::setValueFront);
     //     addProperty(b, ".backLeg.value", this::getValueBack, this::setValueBack);
