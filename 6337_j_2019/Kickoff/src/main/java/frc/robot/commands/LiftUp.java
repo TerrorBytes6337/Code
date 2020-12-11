@@ -13,6 +13,7 @@ public class LiftUp extends InstantCommand {
     }  
 
     protected void execute() {
+        //System.out.println("Work you metal shit.");
         if(speed > 0){
             Robot.m_LiftingSubsystem.subliftInstance.setPositive(speed);
         }else if (speed < 0){

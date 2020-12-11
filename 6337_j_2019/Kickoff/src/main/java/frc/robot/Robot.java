@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 
   //#region Subsystems
   public static Driving m_DrivingSubsystem;
-  // public static Sublift m_LiftingSubsystem;
+  //public static Sublift m_LiftingSubsystem;
   public static LiftingSubsystem m_LiftingSubsystem;
   public static CargoHandler m_cargoHandlerSubsystem;
   //public static CameraSubsystem m_CameraSubsystem;
@@ -102,20 +102,20 @@ public class Robot extends TimedRobot {
     // OI.CLIMBER_FRONT_BUTTON.whenReleased(new ClimbFront(false));
 
     System.out.println("Mapping Lifting buttons");
-   /* OI.LIFT_UP_BUTTON.whileHeld(new AutonomousLiftUp(1, true));
-    OI.LIFT_UP_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));
-    OI.LIFT_DOWN_BUTTON.whileHeld(new AutonomousLiftUp(-0.5, true));
-    OI.LIFT_DOWN_BUTTON.whenReleased(new AutonomousLiftUp(0.15, false));*/
+    OI.LIFT_UP_BUTTON.whileHeld(new LiftUp(1));
+    OI.LIFT_UP_BUTTON.whenReleased(new LiftUp(0.15));
+    OI.LIFT_DOWN_BUTTON.whileHeld(new LiftUp(-0.5));
+    OI.LIFT_DOWN_BUTTON.whenReleased(new LiftUp(0.15));
 
     System.out.println("Mapping Cargo Handler buttons");
-    OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(0.5));
+    OI.CARGO_HANDLER_DOWN_BUTTON.whileActive(new CargoLift(1));
     OI.CARGO_HANDLER_DOWN_BUTTON.whenReleased(new CargoLift(0.1));
-    OI.CARGO_HANDLER_UP_BUTTON.whileActive(new CargoLift(-0.5));
+    OI.CARGO_HANDLER_UP_BUTTON.whileActive(new CargoLift(-1));
     OI.CARGO_HANDLER_UP_BUTTON.whenReleased(new CargoLift(0.1));
 
-    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(0.5));
+    OI.CARGO_HANDLER_IN_BUTTON.whileActive(new CargoGetBall(1));
     OI.CARGO_HANDLER_IN_BUTTON.whenReleased(new CargoGetBall(0));
-    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-0.25));
+    OI.CARGO_HANDLER_OUT_BUTTON.whileActive(new CargoGetBall(-1));
     OI.CARGO_HANDLER_OUT_BUTTON.whenReleased(new CargoGetBall(0));
 
     System.out.println("Adding arcade drive command to scheduler");
@@ -215,7 +215,7 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
-    teleopInit();
+    teleopPeriodic();
   }
 
   /**

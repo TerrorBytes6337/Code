@@ -17,7 +17,7 @@ public class PushPanel extends Command
     protected void execute()
     {
         // //TODO: REMOVE THIS LINE AFTER DEBUG
-        // System.out.println("push = " + push);
+        System.out.println("in execute push = " + push);
         Robot.m_PanelSubsystem.push(push);
     }
     @Override
